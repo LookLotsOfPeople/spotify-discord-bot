@@ -1,8 +1,9 @@
 # IntelliJ #
 /.idea
 
-# Compile #
+# Compiled Output #
 /out
+/target
 
 # Secrets #
 client_secret.json
