@@ -46,6 +46,10 @@ object SpotifyAuthorization {
 
 		val client = serverSocket.accept()
 		val token = BufferedReader(InputStreamReader(client.getInputStream())).readLine().removePrefix("GET /?code=").removeSuffix(" HTTP/1.1")
+		BufferedReader(InputStreamReader(client.getInputStream())).lines().forEach {
+			println(it)
+		}
+		println(token)
 		client.close()
 		serverSocket.close()
 		return token
