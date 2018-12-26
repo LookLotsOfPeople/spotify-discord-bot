@@ -15,7 +15,7 @@ object SpotifySync {
 				if (syncedData != null && syncedData.containsKey(SyncableData.SongTitle)) {
 					DiscordSync.handleSyncedData(syncedData)
 				}
-			}.start()
+			}
 			Thread.sleep(1000)
 		}
 	}
