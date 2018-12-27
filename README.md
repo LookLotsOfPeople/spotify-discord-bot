@@ -10,3 +10,4 @@ Both of these will be given by your discordapi page.
 Issue | State
 ----- | -----
 Webpage Returns an Error After Account is Authorized | This is NOT a bug but rather intended. I am yet to find a cleaner way to show completion.
+The Bot Cannot Get the Token Correctly from the Web Authentication | Please Disable Any Plugin Forcing Https to be Used for the http://localhost:8888. The Authentication Only Works Over Http.
