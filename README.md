@@ -6,6 +6,11 @@ If you have run the bot release without looking here,
 you will notice that the bot creates a config file in which there is a section for `token` and `ownerId`.
 Both of these will be given by your discordapi page.
 
+## How to Use
+1. Join a Voice Channel the Bot has Access and Permissions to Join
+2. Double click on `spotifyDiscordBot.jar`
+3. To Close: Direct Message the Bot `exit`.
+
 ## Known Issues
 Issue | State
 ----- | -----
