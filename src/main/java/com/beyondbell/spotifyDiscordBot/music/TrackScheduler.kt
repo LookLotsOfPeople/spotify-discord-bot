@@ -22,8 +22,8 @@ class TrackScheduler(private val player: AudioPlayer) : AudioEventAdapter() {
 
 	@Synchronized
 	fun goToTimestamp(timestamp: Long) {
-		val nTrack = track.makeClone()
-		nTrack.position = timestamp
-		player.startTrack(nTrack, false)
+		val track = this.track.makeClone()
+		track.position = timestamp
+		player.startTrack(track, false)
 	}
 }

@@ -11,23 +11,18 @@ class AudioPlayerSendHandler(private val audioPlayer: AudioPlayer) : AudioSendHa
 		if (lastFrame == null) {
 			lastFrame = audioPlayer.provide()
 		}
-
 		return lastFrame != null
 	}
 
 	override fun provide20MsAudio(): ByteArray? {
-		if (lastFrame == null) {
-			lastFrame = audioPlayer.provide()
-		}
-
-		val data = if (lastFrame != null) {
-			lastFrame!!.data
+		return if (canProvide()) {
+			val data = lastFrame!!.data
+			lastFrame = null
+			data
 		} else {
+			lastFrame = null
 			null
 		}
-		lastFrame = null
-
-		return data
 	}
 
 	override fun isOpus(): Boolean {

@@ -31,31 +31,25 @@ object Music {
 	fun playTrack(trackUrl: String, timestamp: Long) {
 		playerManager.loadItem(trackUrl, object : AudioLoadResultHandler {
 			override fun trackLoaded(track: AudioTrack) {
-				getLogger().info("Adding to queue " + track.info.title)
-
 				track.position = timestamp
 				scheduler.play(track)
+				getLogger().info("Added to Queue ${track.info.title} @ ${timestamp/1000/60}:${timestamp/1000%60}")
 			}
 
 			override fun playlistLoaded(playlist: AudioPlaylist) {
-				var firstTrack: AudioTrack? = playlist.selectedTrack
-
-				if (firstTrack == null) {
-					firstTrack = playlist.tracks[0]
-				}
-
-				getLogger().info("Adding to queue " + firstTrack!!.info.title + " (first track of playlist " + playlist.name + ")")
-
+				val firstTrack: AudioTrack = playlist.selectedTrack ?: playlist.tracks[0]
 				firstTrack.position = timestamp
 				scheduler.play(firstTrack)
+				getLogger().info("Added to Queue ${firstTrack.info.title} (First Track of Playlist ${playlist.name})")
 			}
 
 			override fun noMatches() {
-				getLogger().warn("Nothing found by $trackUrl")
+				getLogger().warn("Nothing Found by $trackUrl")
 			}
 
 			override fun loadFailed(exception: FriendlyException) {
-				getLogger().warn("Could not play: " + exception.message)
+				getLogger().warn("Could Not Load $trackUrl")
+				getLogger().debug(exception.message)
 			}
 		})
 	}

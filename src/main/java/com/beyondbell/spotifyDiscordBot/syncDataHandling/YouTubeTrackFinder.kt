@@ -9,10 +9,9 @@ import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.store.FileDataStoreFactory
 import com.google.api.services.youtube.YouTube
 import com.google.api.services.youtube.YouTubeScopes
-import com.google.api.services.youtube.model.SearchListResponse
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import java.util.*
+import java.util.Arrays
 
 object YouTubeTrackFinder {
 	private val youTube: YouTube
@@ -24,12 +23,9 @@ object YouTubeTrackFinder {
 	}
 
 	fun getAudioTrackURLFromString(songContext: String): String {
-		val searchListByKeywordRequest: YouTube.Search.List = youTube.search().list("id")
-		searchListByKeywordRequest.type = "video"
-		searchListByKeywordRequest.maxResults = 1
-		searchListByKeywordRequest.q = songContext
-
-		val response: SearchListResponse = searchListByKeywordRequest.execute()
-		return response.items[0].id.videoId
+		return youTube.search().list("id")
+				.setType("video")
+				.setMaxResults(1)
+				.setQ(songContext).execute().items[0].id.videoId
 	}
 }
