@@ -1,4 +1,4 @@
-package com.beyondbell.spotifyDiscordBot.music
+package com.beyondbell.spotifydiscordbot.music
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame

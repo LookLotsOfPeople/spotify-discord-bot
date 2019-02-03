@@ -1,7 +1,6 @@
-package com.beyondbell.spotifyDiscordBot.music
+package com.beyondbell.spotifydiscordbot.music
 
-import com.beyondbell.spotifyDiscordBot.getLogger
-import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats
+import com.beyondbell.spotifydiscordbot.getLogger
 import com.sedmelluq.discord.lavaplayer.player.AudioConfiguration
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
@@ -17,11 +16,15 @@ object Music {
 	private val player: AudioPlayer
 	private val playerManager: AudioPlayerManager
 
+	var paused: Boolean
+		get() = player.isPaused
+		set(value) {
+			player.isPaused = value
+		}
+
 	init {
 		playerManager = DefaultAudioPlayerManager()
-		playerManager.configuration.opusEncodingQuality = AudioConfiguration.OPUS_QUALITY_MAX
 		playerManager.configuration.resamplingQuality = AudioConfiguration.ResamplingQuality.HIGH
-		playerManager.configuration.outputFormat = StandardAudioDataFormats.DISCORD_OPUS
 		AudioSourceManagers.registerRemoteSources(playerManager)
 		player = playerManager.createPlayer()
 		scheduler = TrackScheduler(player)
@@ -33,7 +36,7 @@ object Music {
 			override fun trackLoaded(track: AudioTrack) {
 				track.position = timestamp
 				scheduler.play(track)
-				getLogger().info("Added to Queue ${track.info.title} @ ${timestamp/1000/60}:${timestamp/1000%60}")
+				getLogger().info("Added to Queue ${track.info.title} @ ${timestamp / 1000 / 60}:${timestamp / 1000 % 60}")
 			}
 
 			override fun playlistLoaded(playlist: AudioPlaylist) {
@@ -56,14 +59,6 @@ object Music {
 
 	fun goToTimestamp(timestamp: Long) {
 		scheduler.goToTimestamp(timestamp)
-	}
-
-	fun pause() {
-		player.isPaused = true
-	}
-
-	fun unpause() {
-		player.isPaused = false
 	}
 
 	fun getSendHandler(): AudioPlayerSendHandler {

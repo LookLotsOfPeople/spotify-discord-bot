@@ -1,4 +1,4 @@
-package com.beyondbell.spotifyDiscordBot.spotifySync
+package com.beyondbell.spotifydiscordbot.spotifysync
 
 import com.wrapper.spotify.SpotifyApi
 import com.wrapper.spotify.SpotifyHttpManager
@@ -36,20 +36,16 @@ object SpotifyAuthorization {
 	}
 
 	private fun getAuthorizationToken(): String {
-		val spotifyApi = SpotifyApi.Builder()
-				.setClientId(clientId)
-				.setRedirectUri(SpotifyHttpManager.makeUri("http://localhost:$port"))
-				.build()
-
-		val serverSocket = ServerSocket(8888)
-		return serverSocket.use { ss ->
-			Desktop.getDesktop().browse(spotifyApi.authorizationCodeUri()
+		return ServerSocket(8888).use { ss ->
+			Desktop.getDesktop().browse(SpotifyApi.Builder()
+					.setClientId(clientId)
+					.setRedirectUri(SpotifyHttpManager.makeUri("http://localhost:$port"))
+					.build().authorizationCodeUri()
 					.scope(scope)
 					.show_dialog(true)
 					.build().execute())
 
-			val client = ss.accept()
-			client.use { s ->
+			ss.accept().use { s ->
 				s.inputStream.bufferedReader().use {
 					it.readLine().removePrefix("GET /?code=").removeSuffix(" HTTP/1.1")
 				}
@@ -66,6 +62,7 @@ object SpotifyAuthorization {
 	}
 
 	private fun startRefreshTokenWorkflow(cred: AuthorizationCodeCredentials) {
+		println(cred)
 		GlobalScope.launch {
 			var newCred = cred
 			while (this.isActive) {

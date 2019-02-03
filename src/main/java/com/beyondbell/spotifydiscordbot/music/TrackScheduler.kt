@@ -1,4 +1,4 @@
-package com.beyondbell.spotifyDiscordBot.music
+package com.beyondbell.spotifydiscordbot.music
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter
@@ -22,7 +22,7 @@ class TrackScheduler(private val player: AudioPlayer) : AudioEventAdapter() {
 
 	@Synchronized
 	fun goToTimestamp(timestamp: Long) {
-		val track = this.track.makeClone()
+		val track = track.makeClone()
 		track.position = timestamp
 		player.startTrack(track, false)
 	}

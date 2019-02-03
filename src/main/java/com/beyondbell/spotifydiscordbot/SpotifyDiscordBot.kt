@@ -1,8 +1,8 @@
-package com.beyondbell.spotifyDiscordBot
+package com.beyondbell.spotifydiscordbot
 
-import com.beyondbell.spotifyDiscordBot.music.Music
-import com.beyondbell.spotifyDiscordBot.spotifySync.SpotifyAuthorization
-import com.beyondbell.spotifyDiscordBot.spotifySync.SpotifySync
+import com.beyondbell.spotifydiscordbot.music.Music
+import com.beyondbell.spotifydiscordbot.spotifysync.SpotifyAuthorization
+import com.beyondbell.spotifydiscordbot.spotifysync.SpotifySync
 import net.dv8tion.jda.core.JDA
 import net.dv8tion.jda.core.JDABuilder
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent

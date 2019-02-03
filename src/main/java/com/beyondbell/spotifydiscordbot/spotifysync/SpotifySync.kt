@@ -1,7 +1,7 @@
-package com.beyondbell.spotifyDiscordBot.spotifySync
+package com.beyondbell.spotifydiscordbot.spotifysync
 
-import com.beyondbell.spotifyDiscordBot.getLogger
-import com.beyondbell.spotifyDiscordBot.syncDataHandling.DiscordSync
+import com.beyondbell.spotifydiscordbot.getLogger
+import com.beyondbell.spotifydiscordbot.syncdatahandling.DiscordSync
 import com.wrapper.spotify.SpotifyApi
 import com.wrapper.spotify.exceptions.SpotifyWebApiException
 import kotlinx.coroutines.GlobalScope
@@ -33,6 +33,7 @@ class SpotifySync {
 			if (currentlyPlayingContext != null) {
 				syncedData[SyncableData.SongTitle] = currentlyPlayingContext.item.name
 				syncedData[SyncableData.SongArtist] = currentlyPlayingContext.item.artists[0].name
+				syncedData[SyncableData.SongLength] = currentlyPlayingContext.item.durationMs.toString()
 				syncedData[SyncableData.SongTimestamp] = currentlyPlayingContext.progress_ms.toString()
 				syncedData[SyncableData.IsPlaying] = currentlyPlayingContext.is_playing.toString()
 			}
