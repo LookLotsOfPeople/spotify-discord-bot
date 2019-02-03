@@ -23,7 +23,7 @@ object YouTubeTrackFinder {
 		youTube = YouTube.Builder(httpTransport, jsonFactory, AuthorizationCodeInstalledApp(GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, GoogleClientSecrets.load(jsonFactory, InputStreamReader(FileInputStream("client_secret.json"))), Arrays.asList(YouTubeScopes.YOUTUBE_READONLY)).setDataStoreFactory(FileDataStoreFactory(File(System.getProperty("user.home"), ".credentials/bugisoft"))).setAccessType("offline").build(), LocalServerReceiver()).authorize("user")).setApplicationName("Bugisoft Track Finder").build()
 	}
 
-	fun getAudioTrackURLFromString(songContext: String, desiredLength: Long): String {
+	fun getAudioTrackURLFromString(songContext: String): String {
 		return youTube.search().list("id")
 				.setType("video")
 				.setMaxResults(1)

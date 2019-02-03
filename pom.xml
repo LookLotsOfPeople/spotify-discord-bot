@@ -6,7 +6,7 @@
 
     <groupId>com.beyondbell</groupId>
     <artifactId>spotify-discord-bot</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <jda.version>3.8.2_459</jda.version>

@@ -10,13 +10,13 @@ object DiscordSync {
 	fun handleSyncedData(data: EnumMap<SyncableData, String>) {
 		if (this::lastData.isInitialized) {
 			if (data[SyncableData.SongTitle] != lastData[SyncableData.SongTitle]) {
-				Music.playTrack(YouTubeTrackFinder.getAudioTrackURLFromString("${data[SyncableData.SongTitle]} ${data[SyncableData.SongArtist]}", data[SyncableData.SongLength]!!.toLong()), data[SyncableData.SongTimestamp]?.toLong()
+				Music.playTrack(YouTubeTrackFinder.getAudioTrackURLFromString("${data[SyncableData.SongTitle]} ${data[SyncableData.SongArtist]}"), data[SyncableData.SongTimestamp]?.toLong()
 						?: 0)
 			} else if (Math.abs(data[SyncableData.SongTimestamp]!!.toLong() - lastData[SyncableData.SongTimestamp]!!.toLong()) > 2000) {
 				Music.goToTimestamp(data[SyncableData.SongTimestamp]!!.toLong())
 			}
 		} else {
-			Music.playTrack(YouTubeTrackFinder.getAudioTrackURLFromString("${data[SyncableData.SongTitle]} ${data[SyncableData.SongArtist]}", data[SyncableData.SongLength]!!.toLong()), data[SyncableData.SongTimestamp]?.toLong()
+			Music.playTrack(YouTubeTrackFinder.getAudioTrackURLFromString("${data[SyncableData.SongTitle]} ${data[SyncableData.SongArtist]}"), data[SyncableData.SongTimestamp]?.toLong()
 					?: 0)
 		}
 		val isPlayingData = data[SyncableData.IsPlaying]?.toBoolean()
